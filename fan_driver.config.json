@@ -1,0 +1,6 @@
+{
+	"temp_max": 55,
+	"temp_min": 45,
+	"sleep": 1,
+	"control_pin": 21
+}

@@ -1,0 +1,17 @@
+[Unit]
+Description=Fan cooling system driver
+After=syslog.target
+
+[Service]
+User=root
+Group=root
+Type=simple
+Restart=always
+WorkingDirectory=/
+ExecStart=/usr/sbin/fan_driver.py /etc/fan_driver.config.json
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/bin/kill -INT $MAINPID
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target
