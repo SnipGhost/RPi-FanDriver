@@ -46,13 +46,13 @@ class FanDriverDaemon():
         ]
         # default config
         config = {
-            'log_level': 'INFO',    # logging level
+            'log_level': 'INFO',   # logging level
             'log_file': None,      # logging file (None for stderr)
-            'log_format': None,      # logging format (None for default)
+            'log_format': None,    # logging format (None for default)
             'temp_max': 55,        # temperature that activate fan
             'temp_min': 45,        # temperature that deactivate fan
-            'sleep': 1,         # time to sleep in seconds
-            'control_pin': 21,        # transistor base controller pin
+            'sleep': 1,            # time to sleep in seconds
+            'control_pin': 21,     # transistor base controller pin
         }
         with open(config_file) as file:
             data = json.load(file)
@@ -115,7 +115,7 @@ class FanDriverDaemon():
             while self.running:
                 self.work()
                 # sleep until timeout or end_event set
-                # look for self.__signalhandler
+                # look for self.__signal_stop_handler
                 self.end_event.wait(timeout=self.config['sleep'])
                 # and just catch reload after all work on iteration
                 if self.reload_event.is_set():
@@ -134,4 +134,3 @@ if __name__ == "__main__":
     conf = sys.argv[1] if len(sys.argv) > 1 else '/etc/fan_driver.config.json'
     driver = FanDriverDaemon(conf)
     driver.run()
-
