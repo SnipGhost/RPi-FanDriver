@@ -1,10 +1,11 @@
 [Unit]
 Description=Fan cooling system driver
 After=syslog.target
-SyslogFacility=local0
-SyslogLevel=info
 
 [Service]
+SyslogIdentifier=fan-driver
+SyslogFacility=local0
+SyslogLevel=info
 User=root
 Group=root
 Type=simple
