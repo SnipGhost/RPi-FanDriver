@@ -1,6 +1,8 @@
 [Unit]
 Description=Fan cooling system driver
 After=syslog.target
+SyslogFacility=local0
+SyslogLevel=info
 
 [Service]
 User=root

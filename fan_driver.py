@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import RPi.GPIO as GPIO
 import sys
@@ -7,6 +7,7 @@ import logging
 import signal
 import threading
 from time import sleep
+from logging.handlers import WatchedFileHandler
 
 
 class FanDriverDaemon():
@@ -21,7 +22,9 @@ class FanDriverDaemon():
             self.log = logging.getLogger()
 
         if self.config['log_file']:
-            fh = logging.FileHandler(self.config['log_file'])
+            fh = WatchedFileHandler(self.config['log_file'])
+            formatter = logging.Formatter(self.config['log_format'])
+            fh.setFormatter(formatter)
             self.log.addHandler(fh)
         self.log.setLevel(getattr(logging, self.config['log_level']))
         self.log.info('Loaded config')
